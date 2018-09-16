@@ -43,12 +43,20 @@ if zsh == "oui":
 	if zsh_update == "non":
 		os.system('sudo apt-get install curl')
 
-print('Install Nvidia, GitHub, Steam, ohmyzsh, PPSSPP, pcsx2, ePSXe, Chrome, Obs, Discord, Kdenlive, Audacity, PlayOnLinux, PcsxR\n')
+print('Install Nvidia, GitHub, Steam, ohmyzsh, PPSSPP, pcsx2, ePSXe, Chrome, Obs, Discord, Kdenlive, Audacity, PlayOnLinux, PcsxR (OPTIONAL: ohmyzsh)\n')
 all_install = raw_input("Tous installer 1 ou 2 pour du cas par cas\n").lower()
 
-if all_install == "2":
+while all_install == "2":
 
+	print('\n')
+	print('/////////////////////')
+	print('\n')
+	print('Si vous voulez arreter taper : stop')
+	print('\n')
 	all_software = raw_input('Que voulez vous installer ?:\n').lower()
+	
+	if all_software == "stop":
+		break
 
 	# Install GitHub
 	if all_software == "github":
@@ -135,11 +143,11 @@ if all_install == "2":
 		print('\n')
 		print('/////////////////////')
 		print('\n')
-		os.system("curl -k https://download.loveroms.com/extras/files/bios/ps2_bios.zip -o ~/.pcsx2/bios/ps2_bios.zip")
+		os.system("wget http://fichier2.easycommander.com/clean/Bios_PS2_PAL_SCPH39004R_8201.zip && unzip Bios_PS2_PAL_SCPH39004R_8201.zip")
 		print('\n')
 		print('/////////////////////')
 		print('\n')
-		os.system("unzip ~/.pcsx2/bios/ps2_bios.zip")
+		os.system("cp SCPH30004R.bin ~/.config/PCSX2/bios && rm -rf Bios_PS2_PAL_SCPH39004R_8201.zip && rm -rf SCPH39004R.bin")
 		print('\n')
 		print('/////////////////////')
 		print('\n')
@@ -147,15 +155,12 @@ if all_install == "2":
 
 	# Install ePSXe
 	if all_software == "epsxe":
-		way = raw_input('Ou mettre le projet ePSXe, exemple : /home/user/\n')
-		os.system("curl -k http://www.epsxe.com/files/ePSXe205linux_x64.zip -o "+way+"ePSXe205linux_x64.zip")
+		os.system("wget -O ePSXe64Ubuntu.sh https://raw.githubusercontent.com/brandleesee/ePSXe64Ubuntu/master/ePSXe64Ubuntu.sh")
 		print('\n')
-		os.system("unzip"+ way+"ePSXe205linux_x64.zip -o"+ way)
+		print('après l\'installation faire "bash ePSXe64Ubuntu.sh"')
 		print('\n')
 		print('/////////////////////')
 		print('\n')
-		os.system("curl -k http://dllyes.com/wp-content/uploads/2015/09/SCPH7502.zip -o ~/.epsxe/bios")
-		os.system("unzip ~/.epsxe/bios/SCPH7502.zip && sudo rm -rf SCPH7502.zip")
 
 	# Install PlayOnLinux
 	if all_software == "playonlinux":
@@ -168,7 +173,7 @@ if all_install == "2":
 		print('\n')
 		print('/////////////////////')
 		print('\n')
-		os.system('sudo apt -V install playonlinux')
+		os.system('sudo apt-get install playonlinux')
 
 	# Install PCSX 
 	if all_software == "pcsxr":
@@ -176,7 +181,14 @@ if all_install == "2":
 		print('\n')
 		print('/////////////////////')
 		print('\n')
-		os.system('apt-get install pcsxr')
+		os.system('sudo apt-get install pcsxr')
+
+	
+	if all_software == "ohmyzsh":
+		os.system('sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"')
+		print('\n')
+		print('/////////////////////')
+		print('\n')
 
 if all_install == "1":
 	print('INSTALLATION DE REPOSITORY :')
@@ -218,13 +230,6 @@ if all_install == "1":
 	os.system("ubuntu-drivers devices")
 	nvidia_driver = raw_input("Rentrez le numeros")
 	os.system("sudo apt-get install nvidia-" + nvidia_driver)
-	print('\n')
-	print('/////////////////////')
-	print('\n')
-
-	print('INSTALLATION DE OH MY ZSH :')
-	print('\n')
-	os.system('sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"')
 	print('\n')
 	print('/////////////////////')
 	print('\n')
@@ -282,28 +287,19 @@ if all_install == "1":
 	print('\n')
 	print('/////////////////////')
 	print('\n')
-	os.system("curl -k https://download.loveroms.com/extras/files/bios/ps2_bios.zip -o ~/.pcsx2/bios/ps2_bios.zip")
+	os.system("wget http://fichier2.easycommander.com/clean/Bios_PS2_PAL_SCPH39004R_8201.zip  ")
 	print('\n')
-	print('/////////////////////')
+	os.system("unzip Bios_PS2_PAL_SCPH39004R_8201.zip")
 	print('\n')
-	os.system("unzip ~/.pcsx2/bios/ps2_bios.zip")
-	print('\n')
-	print('supprimer le dossier ps2_bios mais avant mettez tous les fichiers a l intérieur de /bios')
+	os.system("cp SCPH30004R.bin ~/.config/PCSX2/bios && rm -rf Bios_PS2_PAL_SCPH39004R_8201.zip && rm -rf SCPH39004R.bin")
 	print('\n')
 	print('/////////////////////')
 	print('\n')
 
 	print('INSTALLATION DE EPSXE :')
+	os.system("wget -O ePSXe64Ubuntu.sh https://raw.githubusercontent.com/brandleesee/ePSXe64Ubuntu/master/ePSXe64Ubuntu.sh")
 	print('\n')
-	way = raw_input('Ou mettre le projet ePSXe, exemple : /home/user/\n')
-	os.system("curl -k http://www.epsxe.com/files/ePSXe205linux_x64.zip -o "+way+"ePSXe205linux_x64.zip")
-	print('\n')
-	os.system("unzip"+ way+"ePSXe205linux_x64.zip -o"+ way)
-	print('\n')
-	print('/////////////////////')
-	print('\n')
-	os.system("curl -k http://dllyes.com/wp-content/uploads/2015/09/SCPH7502.zip -o ~/.epsxe/bios")
-	os.system("unzip ~/.epsxe/bios/SCPH7502.zip && sudo rm -rf SCPH7502.zip")
+	print('après l\'installation faire "bash ePSXe64Ubuntu.sh"')
 	print('\n')
 	print('/////////////////////')
 	print('\n')
@@ -337,6 +333,13 @@ if all_install == "1":
 	print('\n')
 	print('/////////////////////')
 	print('\n')
+
+	# print('INSTALLATION DE OH MY ZSH :')
+	# print('\n')
+	# os.system('sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"')
+	# print('\n')
+	# print('/////////////////////')
+	# print('\n')
 
 print('\n')
 print('/////////////////////')
